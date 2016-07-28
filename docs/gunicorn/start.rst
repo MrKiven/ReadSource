@@ -3,8 +3,11 @@
 从哪里开始
 ----------
 
-首先从gunicorn的 `setup.py` 开始吧.
-里面的 `entry_points` 里这样:
+.. contents::
+    :local:
+
+首先从gunicorn的 ``setup.py`` 开始吧.
+里面的 ``entry_points`` 里这样:
 
 .. code:: python
 
@@ -18,7 +21,7 @@
     main=gunicorn.app.pasterapp:paste_server
     """
 
-所以我们从最基础的 `wsgiapp` 看起.
+所以我们从最基础的 ``wsgiapp`` 看起.
 
 WSGIApplication
 ^^^^^^^^^^^^^^^^
@@ -32,7 +35,7 @@ WSGIApplication
         from gunicorn.app.wsgiapp import WSGIApplication
         WSGIApplication("%(prog)s [OPTIONS] [APP_MODULE]").run()
 
-然后我们可以看到 `WSGIApplication` 这个class, 其实代码也不长:
+然后我们可以看到 ``WSGIApplication`` 这个class, 其实代码也不长:
 
 .. code:: python
 
@@ -89,8 +92,11 @@ WSGIApplication
         else:
             return self.load_wsgiapp()
 
-可以看到这个 `WSGIApplication` 类继承自 `Application` .
+可以看到这个 ``WSGIApplication`` 类继承自 ``Application`` .
 所以, 我们需要进入到这个父类里一探究竟.
+
+Application
+^^^^^^^^^^^^
 
 .. code:: python
 
@@ -210,7 +216,10 @@ WSGIApplication
 
         super(Application, self).run()
 
-这个 `Application` 类则继承一个Base类 `BaseApplication`:
+这个 ``Application`` 类则继承一个Base类 ``BaseApplication``:
+
+BaseApplication
+^^^^^^^^^^^^^^^
 
 .. code:: python
 
@@ -275,11 +284,16 @@ WSGIApplication
             sys.stderr.flush()
             sys.exit(1)
 
-所以当实例化 `WSGIApplication` 的时候, 第一步做的其实是 `do_load_config()`, 这个方法中,
-首先加载了默认配置 `load_default_config()`, 其实就是实例化了 `gunicorn.config.Config()` 类.
-然后则是加载我们实际的配置: `load_config()`. `load_config()` 的时候做了一步 `init()` 的操作.
-这个 `init()` 就是 `WSGIApplication()` 类里的 `init()` 方法. 当然, 我们可以覆写这个 `init()` 方法.
-然后就是调用了 `run()` 这个方法. `run()` 方法里, 则尝试加载我们app. `util.import_app(self.app_uri)` .
-最后调用 `BaseApplication` 类的 `run()` 方法. 这个 `run()` 方法中则启动了我们所谓的 `master`: `Arbiter(self).run()`.
+所以当实例化 ``WSGIApplication`` 的时候, 第一步做的其实是 ``do_load_config()``, 这个方法中,
 
-接下来, 我们就需要进入到 `gunicorn.arbiter.Arbiter` 中一探究竟了.
+首先加载了默认配置 ``load_default_config()``, 其实就是实例化了 ``gunicorn.config.Config()`` 类.
+
+然后则是加载我们实际的配置: ``load_config()``, ``load_config()`` 的时候做了一步 ``init()`` 的操作.
+
+这个 ``init()`` 就是 ``WSGIApplication()`` 类里的 ``init()`` 方法. 当然, 我们可以覆写这个 ``init()`` 方法.
+
+然后就是调用了 ``run()`` 这个方法. ``run()`` 方法里, 则尝试加载我们app. ``util.import_app(self.app_uri)`` .
+
+最后调用 ``BaseApplication`` 类的 ``run()`` 方法. 这个 ``run()`` 方法中则启动了我们所谓的 ``master``: ``Arbiter(self).run()``.
+
+接下来, 我们就需要进入到 ``gunicorn.arbiter.Arbiter`` 中一探究竟了.
