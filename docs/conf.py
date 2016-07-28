@@ -213,6 +213,14 @@ latex_elements = {
             '\DeclareUnicodeCharacter{00A0}{ }',  # NO-BREAK SPACE
             '\DeclareUnicodeCharacter{251C}{+}',  # BOX DRAWINGS LIGHT VERTICAL AND RIGHT
             '\DeclareUnicodeCharacter{2514}{+}',  # BOX DRAWINGS LIGHT UP AND RIGHT
+            '\usepackage[utf8]{inputenc}',
+            '\usepackage[T1]{fontenc}',
+            '\usepackage{lmodern}',
+            '\usepackage[francais]{babel}',
+            '\frenchbsetup{CompactItemize=false}',
+            '\usepackage{amsmath}',
+            '\usepackage{amsfonts}',
+            '\usepackage{amsthm}',
         )),
 # The paper size ('letterpaper' or 'a4paper').
 #'papersize': 'letterpaper',
