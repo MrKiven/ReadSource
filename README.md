@@ -2,9 +2,11 @@
 
 Read excellent source.
 
-# Join with me
+## Join with me
 
-# Look up
+patch is welcome. :clap:
+
+## Look up
 
     make doc
     cd docs/build/html
