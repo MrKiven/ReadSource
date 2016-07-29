@@ -7,3 +7,4 @@ Gunicorn
     :maxdepth: 1
 
     start
+    arbiter
