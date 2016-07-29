@@ -109,3 +109,20 @@ self.start
             self.worker_class.check_config(self.cfg, self.log)
 
         self.cfg.when_ready(self)
+
+这个函数主要是看最后一段代码, 这个时候是 ``master`` 初始化后, 执行 ``when_ready`` 这个钩子.
+这个钩子, 我们可以做一些事情, 给个例子:
+
+.. code:: python
+
+    # this is your application file
+
+    from gunicron.app.base import Application
+
+    def when_ready(server):
+        """when gunicorn master start, do something yourself"""
+
+
+    class MyApp(Application):
+        def install_hooks(self):
+            self.cfg.set('when_ready', when_ready)
