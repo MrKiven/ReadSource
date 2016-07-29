@@ -73,6 +73,7 @@ self.start
 
 
 .. code-block:: python
+   :linenos:
 
     def start(self):
         """\
