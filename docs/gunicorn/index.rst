@@ -1,4 +1,4 @@
-.. _index:
+.. _gunicorn_index:
 
 Gunicorn
 =========
