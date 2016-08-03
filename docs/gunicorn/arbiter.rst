@@ -126,3 +126,33 @@ self.start
     class MyApp(Application):
         def install_hooks(self):
             self.cfg.set('when_ready', when_ready)
+
+self.manage_workers()
+^^^^^^^^^^^^^^^^^^^^^^
+
+.. code:: python
+
+    def manage_workers(self):
+        """\
+        Maintain the number of workers by spawning or killing
+        as required.
+        """
+        if len(self.WORKERS.keys()) < self.num_workers:
+            self.spawn_workers()
+
+        workers = self.WORKERS.items()
+        workers = sorted(workers, key=lambda w: w[1].age)
+        while len(workers) > self.num_workers:
+            (pid, _) = workers.pop(0)
+            self.kill_worker(pid, signal.SIGTERM)
+
+        active_worker_count = len(workers)
+        if self._last_logged_active_worker_count != active_worker_count:
+            self._last_logged_active_worker_count = active_worker_count
+            self.log.debug("{0} workers".format(active_worker_count),
+                           extra={"metric": "gunicorn.workers",
+                                  "value": active_worker_count,
+                                  "mtype": "gauge"})
+
+这个函数就是用来保证 ``worker`` 数量, 主要是通过 ``spawn_workers()`` 和 ``kill_worker``
+这两个函数.
