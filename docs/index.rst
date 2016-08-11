@@ -11,3 +11,5 @@ ReadSource
     gevent/index
     flask/index
     werkzeug/index
+    celery/index
+    kazoo/index
