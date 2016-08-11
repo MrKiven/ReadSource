@@ -10,3 +10,4 @@ ReadSource
     redis-py/index
     gevent/index
     flask/index
+    werkzeug/index
