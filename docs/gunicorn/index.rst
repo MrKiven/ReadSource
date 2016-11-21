@@ -8,3 +8,4 @@ Gunicorn
 
     start
     arbiter
+    workers
