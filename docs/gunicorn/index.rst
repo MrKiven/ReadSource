@@ -4,7 +4,10 @@ Gunicorn
 =========
 
 .. toctree::
-    start
-    arbiter
-    workers
-    graceful_quit
+   :maxdepth: 1
+   :glob:
+
+   start
+   arbiter
+   graceful_quit
+   workers
