@@ -4,8 +4,7 @@ Gunicorn
 =========
 
 .. toctree::
-    :maxdepth: 1
-
     start
     arbiter
     workers
+    graceful_quit
