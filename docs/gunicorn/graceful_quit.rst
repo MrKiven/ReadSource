@@ -3,6 +3,9 @@
 Graceful timeout
 ================
 
+.. contents::
+    :local:
+
 本章主要介绍 gunicorn 是如何 gracefully 退出的.
 
 gunicorn 需要优雅退出必须是 master 接受到一个 `SIGTERM` 信号( `man kill` 查看相关信息).
